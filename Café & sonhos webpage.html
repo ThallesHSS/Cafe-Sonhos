@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café & Sonhos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #00d1ff;
+    color: #fff;
+}
+
+
+header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+
+header nav ul li {
+    margin-left: 30px;
+}
+
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* Hero */
+.hero {
+    background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?fit=crop&w=1350&q=80') no-repeat center center/cover;
+    height: 70vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+
+.btn {
+    background-color: #00d1ff;
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+
+/* Seções */
+section {
+    padding: 60px 50px;
+    text-align: center;
+}
+
+
+section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+}
+
+
+.card {
+    background-color: #f5f5f5;
+    padding: 20px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+
+.capimg {
+    width: 200px;
+}
+
+
+.torimg {
+    width: 200px;
+    height: 156px;
+}
+
+
+.pdqimg {
+    width: 200px;
+    height: 150px;
+}
+
+
+/* Formulário */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+
+form input, form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+
+form button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #00d1ff;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+
+form button:hover {
+    background-color: #c7feff;
+}
+
+
+/* Footer */
+footer {
+    background-color: #00d1ff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.patxt {
+    padding-top: 50px;
+    padding-bottom: 40px;
+    font-size: 25px;
+}
+
+
+.dcstxt{
+    padding-top: 40px;
+    padding-bottom: 50px;
+    font-size: 25px;
+}
+
+
+/* ===== Nav - reset e layout (substitui header nav ul / li antigos) ===== */
+header nav ul {
+  display: flex;
+  gap: 30px;            /* em vez de usar margin-left nos li */
+  list-style: none;
+  margin: 0;
+  padding: 0;           /* importantíssimo para remover indent */
+  align-items: center;
+}
+
+
+header nav ul li {
+  margin: 0;            /* zera margin que cria "gaps" inesperados */
+  position: relative;   /* necessário para o posicionamento absoluto do dropdown */
+}
+
+
+/* ===== Trigger do dropdown (o link "Menu ▾") ===== */
+.dropdown > a {
+  display: block;
+  padding: 8px 12px;    /* garante área de hover consistente */
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* ===== Caixa do dropdown ===== */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: calc(60% + 6px); /* fica logo abaixo do trigger (pequeno espaçamento opcional) */
+  left: 0;               /* ALINHA a borda esquerda da caixa com a borda do <li> pai */
+  margin: 0;
+  padding: 0;            /* remove qualquer padding/indent padrão */
+  list-style: none;
+  min-width: 180px;
+  border-radius: 8px;
+  z-index: 1000;
+  box-sizing: border-box;
+  overflow: hidden;      /* evita que algo "vaze" e crie impressão de gap */
+  background-color: #00d1ff;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+
+.dropbutt{
+    transition: 0.3 ease;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+
+.dropbutt:hover{
+    box-shadow: 0 8px 16px black;
+    border border-radius: 10px;
+    background-color: #00d1ff;
+}
+
+
+/* ===== Itens internos sem espaçamento extra ===== */
+.dropdown-content li {
+  margin: 0;
+  padding: 0;
+}
+
+
+.dropdown-content li a {
+  display: block;
+  padding: 10px 12px;   /* controla o espaçamento interno real dos links */
+  white-space: nowrap;   /* evita quebra que mexe no alinhamento */
+}
+
+
+/* ===== Mostrar: hover + acessibilidade por teclado ===== */
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
+  display: block;
+}
+
+
+.inftxt{
+    font-family: Arial;
+    font-size: 30px;
+    text-align: left;
+    padding-bottom: 20px;
+}
+
+
+.infbtt{
+    border: 2px solid #00d1ff;
+    border-radius: 10px;
+    color: white;
+    background-color: #00d1ff;
+    display: flex;
+    overflow: hidden;
+    max-width: 130px;
+    font-size: 15px;
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.3 ease;
+    box-shadow: none;
+}
+
+
+.infbtt:hover{
+    box-shadow: 0 8px 16px black;
+    background-color: #c7feff;
+}
+
+
+
+
+
+
+    </style>
+    <header>
+  <div class="logo">☕ Café & Sonhos</div>
+  <nav>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li class="dropdown">
+        <a href="#menu">Menu ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="#menu" class="dropbutt">Bebidas</a></li>
+          <li><a href="#padaria" class="dropbutt">Padaria Artesanal</a></li>
+          <li><a href="#doces" class="dropbutt">Doces & Sobremesas</a></li>
+        </ul>
+      </li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+    <section class="hero">
+        <h1>Bem-vindo ao Café & Sonhos</h1>
+        <p>O lugar onde cada xícara vem com um sonho doce.</p>
+        <a href="#menu" class="btn">Conheça nosso menu</a>
+    </section>
+
+
+    <section id="menu">
+        <h2>Menu</h2>
+        <h3>Bebidas</h3>
+        <div class="cards">
+            <div class="card">
+                <img src="https://reservademinas.com.br/wp-content/uploads/2024/11/receitas9.10.png" class="capimg">
+                <h3>Cappuccino</h3>
+                <p>Café cremoso com espuma de leite.</p>
+            </div>
+            <div class="card">
+                <img src="https://static.vecteezy.com/ti/fotos-gratis/p1/10282545-classic-italian-espresso-coffee-isolated-on-red-background-bologna-italy-gratis-foto.jpg" class="torimg">
+                <h3>Espresso Clássico</h3>
+                <p>Delicioso Espresso.</p>
+            </div>
+            <div class="card">
+                <img src="https://media.licdn.com/dms/image/v2/D4D12AQGbE6w3TEFoDA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1675113527815?e=2147483647&v=beta&t=uliDNNkmeC8TgqBGJdg8s0kXAF-iaCT64RC8o65h104" class="pdqimg">
+                <h3>Espresso Duplo</h3>
+                <p>O clássico café intenso e puro.</p>
+            </div>
+        </div>
+
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://cafemotriz.com.br/wp-content/uploads/2024/04/imagem-destacada-cafe-americano-1.jpg" class="pdqimg">
+                    <h3>Americano</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://coffeemais.com/cdn/shop/files/porta-filtro-coador-v60-02-coffee-mais-229521.webp?v=1733231605&width=1445" class="pdqimg">
+                    <h3>Café Coado V60 / Hario</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbRoL7EpuTg2xmu-dV9-alYMnk2GIT-J2XgQ&s" class="pdqimg">
+                    <h3>Cold Brew </h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+            </div>
+
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/iced-latte-30188f7.jpg" class="pdqimg">
+                    <h3>Iced Latte</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaI2_lanHgEaUab18PTr1b6XLeq_Kz8ugLrw&s" class="pdqimg">
+                    <h3>Tônica com Espresso (espresso tonic)</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKHxqWS_txR417gQXtLXty8OsjgB7j6Ag4Ug&s" class="pdqimg">
+                    <h3>Frappé de Café</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+            </div>
+                 
+            <h3 class="patxt" id="padaria">Padaria Artesanal</h3>
+
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1yfEYtrpYHfPYKPkrd5PSiSDXwk2rA9_8ig&s" class="pdqimg">
+                    <h3>Croissant amanteigado</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://guiadacozinha.com.br/wp-content/uploads/2012/01/Croissant-tradicional-de-presunto-e-queijo.jpg" class="pdqimg">
+                    <h3>Croissant recheado (presunto cru e queijo brie)</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://www.serradacanastra.com.br/wp-content/uploads/2021/07/pao-de-queijo-meia-cura-queijo-canastra-blog.jpg" class="pdqimg">
+                    <h3>Pão de queijo mineiro artesanal</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+            </div>
+
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://i0.wp.com/matthewjamesduffy.com/wp-content/uploads/2025/02/Sourdough-Garlic-Toast-Recipe-%E2%80%93-How-to-Make-Pan-con-Ajo-WEB-10.jpg" class="pdqimg">
+                    <h3>Torrada de fermentação natural com manteiga</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://i.panelinha.com.br/i1/bk-2232-blog-ayu9080.webp" class="pdqimg">
+                    <h3>Focaccia de alecrim com azeite</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://www.comidaereceitas.com.br/img/sizeswp/1200x675/2022/05/sanduiche_caprese.jpg" class="pdqimg">
+                    <h3>Mini sanduíche caprese com pesto no brioche</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+            </div>
+
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://i0.statig.com.br/bancodeimagens/6i/2t/be/6i2tbe8a84ht48wk5wl2ixgt5.jpg" class="pdqimg">
+                    <h3>Empanada argentina artesanal</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://formaggiomineiro.com.br/wp-content/uploads/2022/05/pao-de-queijo-com-goiabada.jpeg" class="pdqimg">
+                    <h3>Pão de queijo recheado com goiabada e queijo canastra</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsDi3-bbf8O5OFc7EsNupCfPpnLWgMBbMWPQ&s" class="pdqimg">
+                    <h3>Waffle salgado com ovo e queijo meia cura</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+            </div>
+
+
+            <h3 class="dcstxt" id="doces">Doces Artesanais & Sobremesas</h3>
+
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://www.casalmisterio.com/wp-content/uploads/2023/02/UPGXvDLPQYsLIc0kxy-86KcJNVAekH7L6tjJj_-Jn0s.webp" class="pdqimg">
+                    <h3>Brownie com flor de sal e caramelo</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://i.ytimg.com/vi/XjIdqAdzGoE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDQB0Mk5spqFjWYOsc0h0lbWkBv1Q" class="pdqimg">
+                    <h3>Cookie recheado com Nutella ou Doce de Leite</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://piraque.com.br/wp-content/uploads/2020/12/torta_banoffee-edited.png" class="pdqimg">
+                    <h3>Torta Banoffee com massa de biscoito artesanal</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+            </div>
+
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://static.itdg.com.br/images/640-auto/5c3fa0279c4754c5e3839181404ebf15/bolo-13-.png" class="pdqimg">
+                    <h3>Bolo do dia (Red Velvet, Cenoura com Ganache, Fubá com Goiabada)</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://saborgengibre.wordpress.com/wp-content/uploads/2016/10/rocambole-de-frutas-secas.jpg?w=640" class="pdqimg">
+                    <h3>Rocambole de pistache com frutas secas</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://i.ytimg.com/vi/a8cBTbtlvR8/sddefault.jpg" class="pdqimg">
+                    <h3>Cheesecake brûlée com frutas da estação</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+            </div>
+
+
+            <div class="cards">
+                <div class="card">
+                    <img src="https://i.ytimg.com/vi/1Wxx7HvxGwM/maxresdefault.jpg" class="pdqimg">
+                    <h3>Crème brûlée com baunilha de Madagascar</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://p2.trrsf.com/image/fget/cf/1200/900/middle/images.terra.com/2023/09/07/1008623868-tamanho-padrao-gc-60.jpg" class="pdqimg">
+                    <h3>Pavê de café com mascarpone (versão moderna do tiramisù)</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+                <div class="card">
+                    <img src="https://cdn.awsli.com.br/2500x2500/1554/1554596/produto/318563469/muffin-laranja--25--1uqs8asi0p.jpg" class="pdqimg">
+                    <h3>Mini éclairs (trio de sabores: chocolate, limão siciliano e doce de leite)</h3>
+                    <p>O clássico café intenso e puro.</p>
+                </div>
+            </div>
+    </section>
+
+
+    <section id="contato">
+        <h2>Contato</h2>
+        <form>
+            <input type="text" placeholder="Nome" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Mensagem" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+   
+     <section id="sobre">
+        <h2>Sobre Nós</h2>
+        <p>Somos apaixonados por café e doces artesanais. Nosso objetivo é transformar cada visita em uma experiência inesquecível.</p>
+    </section>
+   
+    <section>
+        <div>
+            <h1 class="inftxt">Conheça o processo de formação do nosso trabalho!</h1>
+           
+            <a href=""><button class="infbtt">Clique Aqui!</button></a>
+        </div>
+       
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 Café & Sonhos. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
+
+
+
+
+
